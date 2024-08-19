@@ -19,14 +19,14 @@ struct CameraView: UIViewControllerRepresentable {
 
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             if let image = info[.originalImage] as? UIImage {
-                parent.recognizeTextInImage(image)
+                parent.onImageCaptured(image)
             }
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
 
     @Environment(\.presentationMode) var presentationMode
-    var recognizeTextInImage: (UIImage) -> Void
+    var onImageCaptured: (UIImage) -> Void
 
     func makeCoordinator() -> Coordinator {
         return Coordinator(parent: self)
@@ -41,3 +41,8 @@ struct CameraView: UIViewControllerRepresentable {
 
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
 }
+//================================================================================================================================================
+import SwiftUI
+
+
+
